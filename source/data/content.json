@@ -1,0 +1,38 @@
+{
+  "title": "Creuna FE sjekkliste",
+  "checklists": [
+    {
+      "title": "Universell utforming",
+      "id": "uu",
+      "items": [
+        {
+          "text": "Aria-attributter på modal"
+        },
+        {
+          "text": "Tab-navigasjon"
+        }
+      ]
+    },
+    {
+      "title": "Skjemaer",
+      "id": "forms",
+      "items": [
+        {
+          "text": "Har 'action'"
+        },
+        {
+          "text": "All felter har label"
+        }
+      ]
+    },
+    {
+      "title": "Dokumentasjon",
+      "id": "documentation",
+      "items": [
+        {
+          "text": "Husk dokumentasjon"
+        }
+      ]
+    }
+  ]
+}
