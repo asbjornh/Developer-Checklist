@@ -6,7 +6,7 @@
   margin: 20px 0;
   border-radius: 20px;
   border: 2px solid transparent;
-  transition: background-color 0.2s, box-shadow 0.2s;
+  transition: background-color 0.2s;
 
   &.has-focus {
     border-color: $green;
@@ -21,6 +21,7 @@
   &.is-completed {
     background-color: $light-green;
     box-shadow: 0 10px 50px -5px rgba($green, 0.2);
+    transition: background-color 0.2s, box-shadow 0.2s;
   }
 
   ul {
