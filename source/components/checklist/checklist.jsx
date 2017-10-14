@@ -5,6 +5,7 @@ import cn from "classnames";
 import { Collapse } from "react-collapse";
 
 import ChecklistItem from "../checklist-item";
+import Emoji from "../emoji";
 import labels from "../../data/labels.json";
 
 import styles from "./checklist.module.scss";
@@ -13,9 +14,10 @@ const getItemId = (idBase, index) => {
   return idBase + index;
 };
 
+const collapseDelay = 700; // Number of milliseconds to wait before collapsing list after all elements have been completed
+
 class Checklist extends React.Component {
   static propTypes = {
-    emoji: PropTypes.string,
     id: PropTypes.string,
     items: PropTypes.array,
     onUpdate: PropTypes.func,
@@ -80,7 +82,7 @@ class Checklist extends React.Component {
             this.button.focus();
             this.setState({ isExpanded: false });
           }
-        }, 1000);
+        }, collapseDelay);
       }
     );
   };
@@ -105,7 +107,9 @@ class Checklist extends React.Component {
           })}
         >
           <div className={styles["button-content"]}>
-            <span className={styles.emoji}>{this.props.emoji}</span>
+            <span className={styles.emoji}>
+              <Emoji isVisible={this.state.isCompleted} size={36} />
+            </span>
             <span className={styles.text}>
               <h2>{this.props.title}</h2>
               <p>{this.getLabelText()}</p>
@@ -132,5 +136,7 @@ class Checklist extends React.Component {
     );
   }
 }
+
+Checklist.collapseDelay = collapseDelay;
 
 export default Checklist;

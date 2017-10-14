@@ -1,0 +1,8 @@
+@import "../../scss/vars";
+
+.emoji {
+  font-family: $emoji-font;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+}

@@ -6,6 +6,7 @@
   margin: 20px 0;
   border-radius: 20px;
   border: 2px solid transparent;
+  transition: background-color 0.2s, box-shadow 0.2s;
 
   &.has-focus {
     border-color: $green;
@@ -20,7 +21,6 @@
   &.is-completed {
     background-color: $light-green;
     box-shadow: 0 10px 50px -5px rgba($green, 0.2);
-    transition: background-color 0.2s 0.3s, box-shadow 0.2s 0.3s;
   }
 
   ul {
@@ -83,7 +83,6 @@
   }
 
   .is-completed & .text {
-    transition-delay: 0.2s;
     transform: translateX(50px);
   }
 
@@ -93,37 +92,7 @@
 }
 
 .emoji {
-  font-family: $emoji-font;
-  font-size: 36px;
   position: absolute;
-  opacity: 0;
-
-  .is-completed & {
-    opacity: 1;
-    animation: bounce 1s;
-  }
-}
-
-@keyframes bounce {
-  0% {
-    transform: scale3d(0, 0, 1);
-  }
-  30% {
-    transform: scale3d(0, 0, 1);
-  }
-  40% {
-    transform: scale3d(1.25, 1.25, 1);
-  }
-  50% {
-    transform: scale3d(0.85, 0.85, 1);
-  }
-  65% {
-    transform: scale3d(1.05, 1.05, 1);
-  }
-  75% {
-    transform: scale3d(0.95, 0.95, 1);
-  }
-  100% {
-    transform: scale3d(1, 1, 1);
-  }
+  top: 50%;
+  transform: translateY(-50%);
 }
