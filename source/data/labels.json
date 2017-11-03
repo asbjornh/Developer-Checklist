@@ -1,3 +1,4 @@
 {
-  "numberOfCompletedItems": "{0} av {1} utført"
+  "numberOfCompletedItems": "{0} av {1} utført",
+  "searchPlaceholder": "Søk"
 }

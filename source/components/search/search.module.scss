@@ -1,0 +1,26 @@
+.search {
+  input {
+    appearance: none;
+    width: 100%;
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    background-color: whitesmoke;
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  ::-webkit-input-placeholder {
+    color: rgba(black, 0.1);
+  }
+  ::-moz-placeholder {
+    color: rgba(black, 0.1);
+  }
+  :-ms-input-placeholder {
+    color: rgba(black, 0.1);
+  }
+  :-moz-placeholder {
+    color: rgba(black, 0.1);
+  }
+}

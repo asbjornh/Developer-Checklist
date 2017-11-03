@@ -21,6 +21,7 @@ class Checklist extends React.Component {
     id: PropTypes.string,
     items: PropTypes.array,
     onUpdate: PropTypes.func,
+    searchTerm: PropTypes.string,
     title: PropTypes.string
   };
 
@@ -58,6 +59,12 @@ class Checklist extends React.Component {
     return labels.numberOfCompletedItems
       .replace("{0}", numberOfCompleted)
       .replace("{1}", total);
+  };
+
+  getTitleHTML = (title, searchTerm) => {
+    const pattern = new RegExp("([^<.]*)(" + searchTerm + ")([^<.]*)", "gi"),
+      replaceWith = `$1<span class="${styles.highlight}">$2</span>$3`;
+    return title.replace(pattern, replaceWith);
   };
 
   onCheckboxChange = e => {
@@ -111,7 +118,14 @@ class Checklist extends React.Component {
               <Emoji isVisible={this.state.isCompleted} size={36} />
             </span>
             <span className={styles.text}>
-              <h2>{this.props.title}</h2>
+              <h2
+                dangerouslySetInnerHTML={{
+                  __html: this.getTitleHTML(
+                    this.props.title,
+                    this.props.searchTerm
+                  )
+                }}
+              />
               <p>{this.getLabelText()}</p>
             </span>
           </div>

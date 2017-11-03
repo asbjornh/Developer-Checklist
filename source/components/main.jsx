@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import FlipMove from "react-flip-move";
 
 import Checklist from "./checklist";
+import Search from "./search";
 
 class Main extends React.Component {
   static propTypes = {
@@ -19,7 +20,8 @@ class Main extends React.Component {
     checklists: this.props.checklists.map(checklist => {
       checklist.isCompleted = false;
       return checklist;
-    })
+    }),
+    searchTerm: ""
   };
 
   onChecklistUpdate = ({ isCompleted, id }) => {
@@ -34,10 +36,15 @@ class Main extends React.Component {
     }, Checklist.collapseDelay);
   };
 
+  onSearch = searchTerm => {
+    this.setState({ searchTerm });
+  };
+
   render() {
     return (
       <div className="main">
         <h1>{this.props.title}</h1>
+        <Search onSearch={this.onSearch} />
 
         <FlipMove
           duration={500}
@@ -54,15 +61,23 @@ class Main extends React.Component {
                 return 0;
               }
             })
+            .filter(checklist => {
+              return (
+                checklist.title
+                  .toLowerCase()
+                  .search(this.state.searchTerm.toLowerCase()) >= 0
+              );
+            })
             .map(checklist => (
               <Checklist
                 key={checklist.id}
                 onUpdate={this.onChecklistUpdate}
+                searchTerm={this.state.searchTerm}
                 {...checklist}
               />
             ))}
         </FlipMove>
-          {/*{this.state.checklists
+        {/*{this.state.checklists
             .map(checklist => (
               <Checklist
                 key={checklist.id}

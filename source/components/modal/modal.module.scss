@@ -32,6 +32,10 @@
   padding: 20px;
   box-shadow: 0 30px 70px rgba(black, 0.25);
 
+  > div > :first-child {
+    margin-top: 0;
+  }
+
   pre {
     background-color: #31394f;
     border-radius: 5px;
