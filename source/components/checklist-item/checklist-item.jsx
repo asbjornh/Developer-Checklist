@@ -13,10 +13,10 @@ import RoundButton from "../round-button";
 
 class ChecklistItem extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
     info: PropTypes.string,
-    text: PropTypes.string,
-    onChange: PropTypes.func
+    text: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
   };
 
   state = {

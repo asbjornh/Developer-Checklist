@@ -10,10 +10,6 @@ import labels from "../../data/labels.json";
 
 import styles from "./checklist.module.scss";
 
-const getItemId = (idBase, index) => {
-  return idBase + index;
-};
-
 const collapseDelay = 700; // Number of milliseconds to wait before collapsing list after all elements have been completed
 
 class Checklist extends React.Component {
@@ -31,9 +27,9 @@ class Checklist extends React.Component {
 
   state = {
     isExpanded: false,
-    items: this.props.items.map((item, index) => {
+    items: this.props.items.map(item => {
       return {
-        id: getItemId(this.props.id, index),
+        id: item.id,
         checked: false
       };
     })
@@ -136,10 +132,9 @@ class Checklist extends React.Component {
           springConfig={{ stiffness: 200, damping: 25 }}
         >
           <ul>
-            {this.props.items.map((item, index) => (
+            {this.props.items.map(item => (
               <ChecklistItem
-                id={getItemId(this.props.id, index)}
-                key={index}
+                key={item.id}
                 onChange={this.onCheckboxChange}
                 {...item}
               />

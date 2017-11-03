@@ -2,21 +2,43 @@
   "title": "Creuna FE sjekkliste",
   "checklists": [
     {
-      "title": "Rammeverk",
-      "id": "framework",
+      "title": "Generelt",
+      "id": "general",
       "items": [
         {
-          "text": "Doctype",
+          "id": "general-doctype",
+          "text": "Doctype og head",
           "info": "/data/popups/doctype.md"
         },
         {
-          "text": "Charset"
+          "id": "general-noopener",
+          "text": "Noopener (lenke i nytt vindu)",
+          "info": "/data/popups/noopener.md"
+        }
+      ]
+    },
+    {
+      "title": "Javascript",
+      "id": "js",
+      "items": [
+        {
+          "id": "js-linter",
+          "text": "Bruker linter (ESLint, JSHint, ...)"
+        }
+      ]
+    },
+    {
+      "title": "Animasjoner",
+      "id": "animations",
+      "items": [
+        {
+          "id": "animations-transform",
+          "text": "Animerer kun transform/opacity",
+          "info": "/data/popups/anim-transform.md"
         },
         {
-          "text": "X-UA-Compatible"
-        },
-        {
-          "text": "Viewport"
+          "id": "animations-duration",
+          "text": "Animasjonen forsinker ikke brukeren"
         }
       ]
     },
@@ -25,10 +47,14 @@
       "id": "uu",
       "items": [
         {
-          "text": "Aria-attributter på modal"
+          "id": "uu-aria",
+          "text": "Aria-attributter",
+          "info": "/data/popups/uu-aria.md"
         },
         {
-          "text": "Tab-navigasjon"
+          "id": "uu-tab",
+          "text": "Tab-navigasjon",
+          "info": "/data/popups/uu-tab.md"
         }
       ]
     },
@@ -37,19 +63,8 @@
       "id": "forms",
       "items": [
         {
-          "text": "Har 'action'"
-        },
-        {
+          "id": "forms-label",
           "text": "All felter har label"
-        }
-      ]
-    },
-    {
-      "title": "Dokumentasjon",
-      "id": "documentation",
-      "items": [
-        {
-          "text": "Husk dokumentasjon"
         }
       ]
     }
