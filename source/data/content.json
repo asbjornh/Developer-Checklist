@@ -2,6 +2,25 @@
   "title": "Creuna FE sjekkliste",
   "checklists": [
     {
+      "title": "Rammeverk",
+      "id": "framework",
+      "items": [
+        {
+          "text": "Doctype",
+          "info": "/data/popups/doctype.md"
+        },
+        {
+          "text": "Charset"
+        },
+        {
+          "text": "X-UA-Compatible"
+        },
+        {
+          "text": "Viewport"
+        }
+      ]
+    },
+    {
       "title": "Universell utforming",
       "id": "uu",
       "items": [

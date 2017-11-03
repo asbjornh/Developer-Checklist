@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const autoprefixer = require("autoprefixer");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -17,6 +18,15 @@ module.exports = (env = {}) => {
     },
     module: {
       rules: [
+        {
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract([
+            {
+              loader: "css-loader",
+              options: { importLoaders: 1, minimize: true }
+            }
+          ])
+        },
         {
           test: /\.scss$/,
           exclude: /\.module\.scss$/,
@@ -82,7 +92,11 @@ module.exports = (env = {}) => {
         }),
         new HtmlWebpackPlugin({
           template: "source/index.html"
-        })
+        }),
+        new CopyWebpackPlugin(
+          [{ from: "source/data/popups", to: "data/popups" }],
+          { copyUnmodified: true }
+        )
       ];
 
       if (isProduction) {

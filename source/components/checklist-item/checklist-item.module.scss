@@ -1,6 +1,7 @@
 @import "../../scss/vars";
 
 .checklist-item {
+  position: relative;
   padding: 0 10px;
 
   input {
@@ -18,7 +19,7 @@
 
         &:before {
           transform: scale(0);
-          transition: transform .3s;
+          transition: transform 0.3s;
         }
 
         &:after {
@@ -76,4 +77,11 @@
   width: 24px;
   height: 24px;
   opacity: 0;
+}
+
+.help-button {
+  position: absolute;
+  top: 3px;
+  right: 15px;
+  font-weight: bold;
 }

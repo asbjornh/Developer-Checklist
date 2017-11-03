@@ -1,0 +1,25 @@
+@import "../../scss/vars";
+
+.button {
+  appearance: none;
+  height: 26px;
+  width: 26px;
+  padding: 0;
+  background-color: transparent;
+  border: 2px solid gray;
+  border-radius: 100%;
+  font-size: 16px;
+  line-height: 0;
+  text-align: center;
+  color: gray;
+  transition: transform 0.3s $ease-out;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 0 2px $green;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
