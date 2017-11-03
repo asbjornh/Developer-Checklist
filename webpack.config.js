@@ -16,6 +16,9 @@ module.exports = (env = {}) => {
       path: path.resolve(__dirname + "/build"),
       filename: isProduction ? "[name].[hash].js" : "[name].js"
     },
+    devServer: {
+      stats: "minimal"
+    },
     module: {
       rules: [
         {
