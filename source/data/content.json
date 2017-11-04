@@ -6,12 +6,16 @@
       "id": "general",
       "items": [
         {
-          "id": "general-doctype",
+          "id": "doctype",
           "text": "Doctype og head",
           "info": "/data/popups/doctype.md"
         },
         {
-          "id": "general-noopener",
+          "id": "favicon",
+          "text": "Favicon"
+        },
+        {
+          "id": "noopener",
           "text": "Noopener (lenke i nytt vindu)",
           "info": "/data/popups/noopener.md"
         }
@@ -22,7 +26,7 @@
       "id": "js",
       "items": [
         {
-          "id": "js-linter",
+          "id": "linter",
           "text": "Bruker linter (ESLint, JSHint, ...)"
         }
       ]
@@ -47,12 +51,12 @@
       "id": "uu",
       "items": [
         {
-          "id": "uu-aria",
+          "id": "aria",
           "text": "Aria-attributter",
           "info": "/data/popups/uu-aria.md"
         },
         {
-          "id": "uu-tab",
+          "id": "tab-navigation",
           "text": "Tab-navigasjon",
           "info": "/data/popups/uu-tab.md"
         }
@@ -63,8 +67,12 @@
       "id": "forms",
       "items": [
         {
-          "id": "forms-label",
+          "id": "form-labels",
           "text": "All felter har label"
+        },
+        {
+          "id": "non-js-forms",
+          "text": "Skjema fungerer uten javascript"
         }
       ]
     }
