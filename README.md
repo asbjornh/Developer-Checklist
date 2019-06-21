@@ -1,4 +1,4 @@
-# Creuna-FE-Checklist
+# Developer-Checklist
 
 Run the thing:
 

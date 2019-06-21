@@ -1,5 +1,5 @@
 {
-  "name": "asbjorn-leker",
+  "name": "developer-checklist",
   "version": "0.0.1",
   "scripts": {
     "build": "rm -rf build && webpack --env.production",
