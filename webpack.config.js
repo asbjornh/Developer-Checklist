@@ -26,7 +26,7 @@ module.exports = (env = {}) => {
           use: ExtractTextPlugin.extract([
             {
               loader: "css-loader",
-              options: { importLoaders: 1, minimize: true }
+              options: { importLoaders: 1 }
             }
           ])
         },
@@ -36,7 +36,7 @@ module.exports = (env = {}) => {
           use: ExtractTextPlugin.extract([
             {
               loader: "css-loader",
-              options: { importLoaders: 1, minimize: true }
+              options: { importLoaders: 1 }
             },
             { loader: "postcss-loader", options: { plugins: [autoprefixer] } },
             { loader: "resolve-url-loader" },
@@ -49,8 +49,9 @@ module.exports = (env = {}) => {
             {
               loader: "css-loader",
               options: {
-                modules: true,
-                localIdentName: "[local]__[hash:base64:5]"
+                modules: {
+                  localIdentName: "[local]__[hash:base64:5]"
+                }
               }
             },
             { loader: "postcss-loader", options: { plugins: [autoprefixer] } },
