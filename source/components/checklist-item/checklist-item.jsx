@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
-import styles from "./checklist-item.module.scss";
+import styles from './checklist-item.module.scss';
 
-import marked from "marked";
-import highlight from "highlight.js";
+import marked from 'marked';
+import highlight from 'highlight.js';
 
-import Emoji from "../emoji";
-import Modal from "../modal";
-import RoundButton from "../round-button";
+import Emoji from '../emoji';
+import Modal from '../modal';
+import RoundButton from '../round-button';
 
 class ChecklistItem extends React.Component {
   static propTypes = {
@@ -59,7 +59,7 @@ class ChecklistItem extends React.Component {
 
   render() {
     return (
-      <li className={styles["checklist-item"]}>
+      <li className={styles['checklist-item']}>
         <input type="checkbox" id={this.props.id} onChange={this.onChange} />
         <label htmlFor={this.props.id}>
           <span className={styles.emoji}>
@@ -70,7 +70,7 @@ class ChecklistItem extends React.Component {
 
         {this.state.infoText && (
           <RoundButton
-            className={styles["help-button"]}
+            className={styles['help-button']}
             onClick={this.showModal}
             ref={rb => (this.helpButton = rb)}
           >

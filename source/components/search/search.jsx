@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import css from "./search.module.scss";
-import labels from "../../data/labels.json";
+import css from './search.module.scss';
+import labels from '../../data/labels.json';
 
 class Search extends React.Component {
   static propTypes = {
@@ -15,15 +15,15 @@ class Search extends React.Component {
 
   state = {
     isVisible: false,
-    searchTerm: ""
+    searchTerm: ''
   };
 
   componentDidMount() {
-    window.addEventListener("keydown", this.handleKeyDown);
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("keydown", this.handleKeyDown);
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   onChange = () => {
@@ -39,9 +39,9 @@ class Search extends React.Component {
         this.input.focus();
       }
     } else if (key === 27) {
-      this.input.value = "";
-      this.setState({ searchTerm: "" });
-      this.props.onSearch("");
+      this.input.value = '';
+      this.setState({ searchTerm: '' });
+      this.props.onSearch('');
     }
   };
 

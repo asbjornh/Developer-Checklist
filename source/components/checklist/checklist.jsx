@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import cn from "classnames";
-import { Collapse } from "react-collapse";
+import cn from 'classnames';
+import { Collapse } from 'react-collapse';
 
-import ChecklistItem from "../checklist-item";
-import Emoji from "../emoji";
-import labels from "../../data/labels.json";
+import ChecklistItem from '../checklist-item';
+import Emoji from '../emoji';
+import labels from '../../data/labels.json';
 
-import styles from "./checklist.module.scss";
+import styles from './checklist.module.scss';
 
 const collapseDelay = 700; // Number of milliseconds to wait before collapsing list after all elements have been completed
 
@@ -53,12 +53,12 @@ class Checklist extends React.Component {
     }, 0);
     const total = this.state.items.length;
     return labels.numberOfCompletedItems
-      .replace("{0}", numberOfCompleted)
-      .replace("{1}", total);
+      .replace('{0}', numberOfCompleted)
+      .replace('{1}', total);
   };
 
   getTitleHTML = (title, searchTerm) => {
-    const pattern = new RegExp("([^<.]*)(" + searchTerm + ")([^<.]*)", "gi"),
+    const pattern = new RegExp('([^<.]*)(' + searchTerm + ')([^<.]*)', 'gi'),
       replaceWith = `$1<span class="${styles.highlight}">$2</span>$3`;
     return title.replace(pattern, replaceWith);
   };
@@ -94,9 +94,9 @@ class Checklist extends React.Component {
     return (
       <div
         className={cn(styles.checklist, {
-          [styles["is-expanded"]]: this.state.isExpanded,
-          [styles["has-focus"]]: this.state.hasFocus,
-          [styles["is-completed"]]: this.state.isCompleted
+          [styles['is-expanded']]: this.state.isExpanded,
+          [styles['has-focus']]: this.state.hasFocus,
+          [styles['is-completed']]: this.state.isCompleted
         })}
       >
         <button
@@ -106,10 +106,10 @@ class Checklist extends React.Component {
           type="button"
           ref={button => (this.button = button)}
           className={cn({
-            [styles["is-expanded"]]: this.state.isExpanded
+            [styles['is-expanded']]: this.state.isExpanded
           })}
         >
-          <div className={styles["button-content"]}>
+          <div className={styles['button-content']}>
             <span className={styles.emoji}>
               <Emoji isVisible={this.state.isCompleted} size={36} />
             </span>

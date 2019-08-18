@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class TabTrapper extends React.Component {
   static propTypes = {
@@ -20,11 +20,11 @@ class TabTrapper extends React.Component {
 
   getButtonStyle = () => {
     return {
-      position: "absolute",
+      position: 'absolute',
       width: 0,
       height: 0,
-      left: "-999em",
-      overflow: "hidden"
+      left: '-999em',
+      overflow: 'hidden'
     };
   };
 

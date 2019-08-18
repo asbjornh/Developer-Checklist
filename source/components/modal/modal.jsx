@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import css from "./modal.module.scss";
+import css from './modal.module.scss';
 
-import Portal from "react-portal";
-import { TransitionMotion, spring } from "react-motion";
+import Portal from 'react-portal';
+import { TransitionMotion, spring } from 'react-motion';
 
-import RoundButton from "../round-button";
-import TabTrapper from "../tab-trapper";
-import utils from "../../js/utils";
+import RoundButton from '../round-button';
+import TabTrapper from '../tab-trapper';
+import utils from '../../js/utils';
 
 class Modal extends React.Component {
   static propTypes = {
@@ -41,7 +41,7 @@ class Modal extends React.Component {
     const element = this.props.isVisible
       ? [
           {
-            key: "1",
+            key: '1',
             style: {
               opacity: spring(1, springConf),
               scale: spring(1, springConf)
@@ -68,7 +68,7 @@ class Modal extends React.Component {
               >
                 {interpolatedStyles.map(({ key, style }) => (
                   <div
-                    className={css["modal-wrapper"]}
+                    className={css['modal-wrapper']}
                     key={key}
                     style={{ opacity: style.opacity }}
                   >
@@ -80,14 +80,14 @@ class Modal extends React.Component {
                     >
                       {this.props.children}
                       <RoundButton
-                        className={css["close-button"]}
+                        className={css['close-button']}
                         onClick={this.props.onCloseButtonClick}
                       >
-                        <span className={css["close-button-x"]}>×</span>
+                        <span className={css['close-button-x']}>×</span>
                       </RoundButton>
                     </div>
                     <div
-                      className={css["modal-background"]}
+                      className={css['modal-background']}
                       onClick={this.props.onCloseButtonClick}
                     />
                   </div>

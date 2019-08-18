@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import cn from "classnames";
+import cn from 'classnames';
 
-import styles from "./round-button.module.scss";
+import styles from './round-button.module.scss';
 
 class RoundButton extends React.Component {
   static propTypes = {

@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import FlipMove from "react-flip-move";
+import FlipMove from 'react-flip-move';
 
-import Checklist from "./checklist";
-import Search from "./search";
+import Checklist from './checklist';
+import Search from './search';
 
 class Main extends React.Component {
   static propTypes = {
@@ -21,7 +21,7 @@ class Main extends React.Component {
       checklist.isCompleted = false;
       return checklist;
     }),
-    searchTerm: ""
+    searchTerm: ''
   };
 
   onChecklistUpdate = ({ isCompleted, id }) => {

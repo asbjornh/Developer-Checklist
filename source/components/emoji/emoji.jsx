@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import emoji from "emoji.json";
+import emoji from 'emoji.json';
 import { Motion, spring } from 'react-motion';
 
 import styles from './emoji.module.scss';
@@ -9,8 +9,8 @@ import styles from './emoji.module.scss';
 const getEmoji = () => {
   let emojis = emoji
     .slice(0, 107) // Remove all the boring ones
-    .filter(emoji => emoji.name.indexOf("⊛") === -1) // Filter out weird ones
-    .filter(emoji => emoji.char !== "🤥"); // Remove buggy ones
+    .filter(emoji => emoji.name.indexOf('⊛') === -1) // Filter out weird ones
+    .filter(emoji => emoji.char !== '🤥'); // Remove buggy ones
 
   const index = Math.floor(Math.random() * emojis.length);
 
@@ -47,10 +47,12 @@ class Emoji extends React.Component {
       <Motion
         initialStyle={{ scale: 0 }}
         style={{
-          scale: this.props.isVisible ? spring(1, { stiffness: 600, damping: 13 }) : 0
+          scale: this.props.isVisible
+            ? spring(1, { stiffness: 600, damping: 13 })
+            : 0
         }}
       >
-        {interpolatedStyle =>
+        {interpolatedStyle => (
           <div
             className={styles.emoji}
             style={{
@@ -60,11 +62,11 @@ class Emoji extends React.Component {
               transform: `scale(${interpolatedStyle.scale})`
             }}
           >
-            <span ref={span => this.innerEmoji = span}>
+            <span ref={span => (this.innerEmoji = span)}>
               {this.state.emoji}
             </span>
           </div>
-        }
+        )}
       </Motion>
     );
   }

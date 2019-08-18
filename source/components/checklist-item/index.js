@@ -1,3 +1,3 @@
-import ChecklistItem from "./checklist-item";
+import ChecklistItem from './checklist-item';
 
 export default ChecklistItem;
