@@ -1,120 +1,145 @@
-const path = require("path");
-const webpack = require("webpack");
-const autoprefixer = require("autoprefixer");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+/* eslint-env node */
+/* eslint-disable no-console */
+const path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const DirectoryNamedPlugin = require('directory-named-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = (env = {}) => {
-  const isProduction = env.production === true;
+const cssCommonConfig = isProduction => [
+  {
+    loader: 'postcss-loader',
+    options: {
+      plugins: [autoprefixer({ grid: true })].concat(
+        isProduction ? [cssnano] : []
+      ),
+      sourceMap: true
+    }
+  },
+  { loader: 'resolve-url-loader', options: { removeCR: true } },
+  { loader: 'sass-loader', options: { sourceMap: true } }
+];
+
+module.exports = (_env, options = {}) => {
+  const isProduction = options.mode === 'production';
+  const outputPath = path.resolve(__dirname, './dist');
 
   return {
+    devServer: {
+      port: 8080,
+      disableHostCheck: true,
+      stats: 'minimal'
+    },
+    devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
     entry: {
-      app: "./source/app.js"
+      style: './source/scss/app.scss',
+      client: ['whatwg-fetch', './source/app.js']
     },
     output: {
-      path: path.resolve(__dirname + "/build"),
-      filename: isProduction ? "[name].[hash].js" : "[name].js"
-    },
-    devServer: {
-      stats: "minimal"
+      path: outputPath,
+      filename: '[name].[chunkhash].js',
+      libraryTarget: 'umd',
+      globalObject: 'this'
     },
     module: {
       rules: [
         {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          use: ['babel-loader', 'eslint-loader']
+        },
+        {
+          enforce: 'pre',
+          test: /\.scss$/,
+          exclude: /node_modules/,
+          use: 'import-glob'
+        },
+        {
           test: /\.css$/,
-          use: ExtractTextPlugin.extract([
+          use: [
+            { loader: MiniCssExtractPlugin.loader },
             {
-              loader: "css-loader",
+              loader: 'css-loader',
               options: { importLoaders: 1 }
             }
-          ])
+          ]
         },
         {
           test: /\.scss$/,
-          exclude: /\.module\.scss$/,
-          use: ExtractTextPlugin.extract([
+          exclude: [/node_modules/, /\.module\.scss$/],
+          use: [
+            { loader: MiniCssExtractPlugin.loader },
             {
-              loader: "css-loader",
-              options: { importLoaders: 1 }
-            },
-            { loader: "postcss-loader", options: { plugins: [autoprefixer] } },
-            { loader: "resolve-url-loader" },
-            { loader: "sass-loader", options: { sourceMap: true } }
-          ])
-        },
-        {
-          test: /\.module\.scss$/,
-          use: ExtractTextPlugin.extract([
-            {
-              loader: "css-loader",
+              loader: 'css-loader',
               options: {
-                modules: {
-                  localIdentName: "[local]__[hash:base64:5]"
-                }
+                importLoaders: 1,
+                sourceMap: true
               }
             },
-            { loader: "postcss-loader", options: { plugins: [autoprefixer] } },
-            { loader: "sass-loader" }
-          ])
+            ...cssCommonConfig(isProduction)
+          ]
         },
         {
-          test: /\.png$/,
-          use: "url-loader"
-        },
-        {
-          test: /\.(svg|jpg|woff2?|ttf|eot)$/,
-          use: "file-loader"
-        },
-        {
-          test: require.resolve("react"),
-          loader: "expose-loader?React"
-        },
-        {
-          test: require.resolve("react-dom"),
-          loader: "expose-loader?ReactDOM"
-        },
-        {
-          test: require.resolve("react-dom/server"),
-          loader: "expose-loader?ReactDOMServer"
-        },
-        {
-          test: /\.jsx?$/,
+          test: /\.module.scss$/,
           exclude: /node_modules/,
-          use: ["babel-loader", "eslint-loader"]
+          use: [
+            { loader: MiniCssExtractPlugin.loader },
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[local]__[hash:base64:5]'
+                },
+                importLoaders: 1,
+                sourceMap: true
+              }
+            },
+            ...cssCommonConfig(isProduction)
+          ]
+        },
+        {
+          test: /\.(svg|png|jpg|woff2?|ttf|eot)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]'
+            }
+          }
         }
       ]
     },
     resolve: {
-      extensions: [".js", ".jsx", ".scss"]
+      extensions: ['.js', '.jsx'],
+      alias: {
+        components: path.resolve('./source/components'),
+        contexts: path.resolve('./source/contexts'),
+        hooks: path.resolve('./source/hooks'),
+        js: path.resolve('./source/js')
+      },
+      plugins: [
+        new DirectoryNamedPlugin({
+          honorIndex: true,
+          include: [path.resolve('./source/components')]
+        })
+      ]
     },
-    plugins: (() => {
-      const plugins = [
-        new ExtractTextPlugin({
-          filename: "app.css",
-          allChunks: true
-        }),
-        new HtmlWebpackPlugin({
-          template: "source/index.html"
-        }),
-        new CopyWebpackPlugin(
-          [{ from: "source/data/popups", to: "data/popups" }],
-          { copyUnmodified: true }
-        )
-      ];
-
-      if (isProduction) {
-        return plugins.concat([
-          new webpack.DefinePlugin({
-            "process.env": {
-              NODE_ENV: JSON.stringify("production")
-            }
-          }),
-          new webpack.optimize.UglifyJsPlugin()
-        ]);
-      }
-
-      return plugins;
-    })()
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css'
+      }),
+      new HtmlWebpackPlugin({
+        template: './source/index.html'
+      }),
+      new CopyWebpackPlugin(
+        [{ from: 'source/data/popups', to: 'data/popups' }],
+        { copyUnmodified: true }
+      )
+    ].concat(
+      // NOTE: This plugin currently makes the codebase crash when recompiling using webpack-dev-server
+      isProduction ? [new webpack.optimize.ModuleConcatenationPlugin()] : []
+    )
   };
 };

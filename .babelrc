@@ -1,14 +1,17 @@
 {
   "plugins": [
-    "babel-plugin-transform-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
   ],
   "presets": [
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 versions", "ie 10"]
+    [
+      "@babel/preset-env",
+      {
+        "corejs": 3,
+        "debug": false,
+        "useBuiltIns": "usage"
       }
-    }],
-    "react",
-    "es2015"
+    ],
+    "@babel/preset-react"
   ]
 }
